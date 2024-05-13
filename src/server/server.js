@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const Hapi = require('@hapi/hapi');
 const routes = require('../server/routes');
 const loadModel = require('../services/loadModel');
@@ -11,7 +10,7 @@ const InputError = require('../exceptions/InputError');
         host: '0.0.0.0',
         routes: {
             cors: {
-                origin: ['*'],
+              origin: ['*'],
             },
         },
     });
@@ -29,7 +28,7 @@ const InputError = require('../exceptions/InputError');
                 status: 'fail',
                 message: `${response.message} Silakan gunakan foto lain.`
             })
-            newResponse.code(response.statusCode);
+            newResponse.code(response.statusCode)
             return newResponse;
         }
 
@@ -38,13 +37,13 @@ const InputError = require('../exceptions/InputError');
                 status: 'fail',
                 message: response.message
             })
-            newResponse.code(response.statusCode);
+            newResponse.code(response.output.statusCode)
             return newResponse;
         }
 
         return h.continue;
-    })
-    
+    });
+
     await server.start();
     console.log(`Server start at: ${server.info.uri}`);
 })();
